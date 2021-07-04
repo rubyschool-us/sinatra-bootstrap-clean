@@ -1,13 +1,24 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    backports (3.21.0)
+    multi_json (1.15.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.7)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (>= 1.3, < 3)
     tilt (1.4.1)
 
 PLATFORMS
@@ -16,3 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   sinatra
+  sinatra-contrib
+
+BUNDLED WITH
+   2.2.21
