@@ -6,24 +6,44 @@
   <div class="form-group">
     
     <legend>Ваше имя</legend>   
-
       <label class="form-label">Введите ваше имя</label>
-      <input name="aaa" type="text" class="form-control" placeholder="Ваше имя">
+      <input id="aaa" name="aaa" type="text" class="form-control" placeholder="Ваше имя">
     
     
     <legend>Телефон</legend>   
-
       <label class="form-label">Введите ваш Телефон</label>
-      <input name="bbb" type="text" class="form-control" placeholder="Ваш телефон">
-    
-    <legend>Адрес</legend>   
-
+      <input name="bbb" type="text" class="form-control bbb" placeholder="Ваш телефон">
+                                 <!Izmenenie cwete cherezclass="form-control bbb >
+    <legend>Адрес</legend>  
       <label class="form-label">Введите ваш Адрес</label>
-      <input name="ccc" type="text" class="form-control" placeholder="Ваш телефон">
+      <input id="ccc" name="ccc" type="text" class="form-control" placeholder="Ваш Адрес">
+</div>
     
-    </div>
+    <div class="form-floating">
+  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+    <option selected>Ваше меню</option>
+    <option value="1">Петя</option>
+    <option value="2">Оля</option>
+    <option value="3">Дуся</option>
+  </select>
+  <label for="floatingSelect">Ваш парикмахер:</label>
+</div>
     
+ 
  <button type="submit" class="btn btn-primary">Записаться</button>
   
-  </fieldset>
 </form>
+<!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>
+                     <!JavaScript>
+<!script type="text/javascript"> <!//Podkluczenie javascript window>
+<!alert("Hello!")>
+<!/script>
+
+             <!Izmenenie cweta w kolonke>
+<script type="text/javascript"> 
+$("#aaa").css("background-color","yellow") // Izmenenie cweta razowo <input id="aaa"
+$("#ccc").css("background-color","grey")
+$(".bbb").css("background-color","grey") //Izmenenie cweta cherez class="form-control bbb 
+</script>
+
+          
