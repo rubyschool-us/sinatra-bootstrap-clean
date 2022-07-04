@@ -25,7 +25,7 @@ post "/" do
     @adres = params[:ccc]
 
     @titel = "Thanks!"                         #Ispolzowanie peremennych s fila "message"
-    @message = ""#"Thanks #{@name}! Your phone:#{@phone}, Your adres:#{@adres}."
+    @message = "Thanks #{@name}! Your phone:#{@phone}, Your adres:#{@adres}."
      
     f = File.open "./public/users.txt","a+"       #Otkrytie fila i sozdanie fila "./public/"
     f.write "User:#{@name}, Phone:#{@phone}, Your Adres:#{@adres}.\n"
