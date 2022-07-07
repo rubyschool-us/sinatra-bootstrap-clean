@@ -23,12 +23,15 @@ post "/" do
     @name = params[:aaa]  #Peredacza i cztenie parametra s HTML "Fail <layout.erb>"
     @phone = params[:bbb]
     @adres = params[:ccc]
+    @barber = params[:barber]
+    @color = params[:color]
 
     @titel = "Thanks!"                         #Ispolzowanie peremennych s fila "message"
-    @message = "Thanks #{@name}! Your phone:#{@phone}, Your adres:#{@adres}."
+    @message = "Thanks #{@name}! Your phone:#{@phone}, Your adres:#{@adres}, 
+    Your barber:#{@barber},Your color:#{@color}."
      
-    f = File.open "./public/users.txt","a+"       #Otkrytie fila i sozdanie fila "./public/"
-    f.write "User:#{@name}, Phone:#{@phone}, Your Adres:#{@adres}.\n"
+    f = File.open "./public/users.txt","a+"    #Otkrytie fila i sozdanie fila "./public/"
+    f.write "User:#{@name},Phone:#{@phone},Your Adres:#{@adres},Your barber:#{@barber},Your color:#{@color}\n"
     f.close
     erb :message    
   
