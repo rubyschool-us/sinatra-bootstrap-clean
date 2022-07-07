@@ -13,14 +13,14 @@
     <legend>Телефон</legend>   
       <label class="form-label">Введите ваш Телефон</label>
       <input name="bbb" type="text" class="form-control bbb" placeholder="Ваш телефон">
-                                 <!Izmenenie cwete cherezclass="form-control bbb >
+                                 <!Izmenenie cwete cherez class="form-control bbb >
     <legend>Адрес</legend>  
       <label class="form-label">Введите ваш Адрес</label>
       <input id="ccc" name="ccc" type="text" class="form-control" placeholder="Ваш Адрес">
 </div>
     
-    <div class="form-floating">
-  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+    <div class="form-group">
+  <select name="barber" class="form-control">
     <option selected>Ваше меню</option>
     <option value="1">Петя</option>
     <option value="2">Оля</option>
@@ -28,7 +28,25 @@
   </select>
   <label for="floatingSelect">Ваш парикмахер:</label>
 </div>
-    
+   
+                  <!Podkluczenie bloka color>
+   <div class="from-group">  
+   <label>Цвет краски:</label>
+<select id="color" name="color">   <!Podkluczenie js color, + name="color" peredacza na server>
+  <option value="#7bd148">Green</option>
+  <option value="#5484ed">Bold blue</option>
+  <option value="#a4bdfc">Blue</option>
+  <option value="#46d6db">Turquoise</option>
+  <option value="#7ae7bf">Light green</option>
+  <option value="#51b749">Bold green</option>
+  <option value="#fbd75b">Yellow</option>
+  <option value="#ffb878">Orange</option>
+  <option value="#ff887c">Red</option>
+  <option value="#dc2127">Bold red</option>
+  <option value="#dbadff">Purple</option>
+  <option value="#e1e1e1">Gray</option>
+</select>
+</div>
  
  <button type="submit" class="btn btn-primary">Записаться</button>
   
@@ -46,4 +64,8 @@ $("#ccc").css("background-color","grey")
 $(".bbb").css("background-color","grey") //Izmenenie cweta cherez class="form-control bbb 
 </script>
 
-          
+ 
+<script type="text/javascript"> //Podkluczenie javascript bloka color!
+$("#color").simplecolorpicker();
+</script>
+       
