@@ -6,8 +6,8 @@
   <div class="form-group">
     
     <legend>Ваше имя</legend>   
-      <label class="form-label">Введите ваше имя</label>
-      <input id="aaa" name="aaa" type="text" class="form-control" placeholder="Ваше имя">
+      <label class="form-label">Введите ваше имя</label>                               <!Sochranenie znachenija>
+      <input id="aaa" name="aaa" type="text" class="form-control" placeholder="Ваше имя" value="<%= @name %>">
     
     
     <legend>Телефон</legend>   
@@ -66,6 +66,10 @@ $(".bbb").css("background-color","grey") //Izmenenie cweta cherez class="form-co
 
  
 <script type="text/javascript"> //Podkluczenie javascript bloka color!
-$("#color").simplecolorpicker();
+
+$(function() {               // Js construkcija kak w Ruby "def"
+  $("#color").simplecolorpicker();  // Tut ja mogu napisat luboy js code
+});
+
 </script>
        
