@@ -53,15 +53,15 @@ post "/" do
     f = File.open "./public/users.txt","a+"    #Otkrytie fila i sozdanie fila "./public/"
     f.write "User:#{@name},Phone:#{@phone},Your Adres:#{@adres},Your barber:#{@barber},Your color:#{@color}\n"
     f.close
-     
+
       erb :message
   end    
   
     # Добавить зону /admin где по паролю будет выдаваться список тех, кто записался (из users.txt)
     
-    post "/admin" do
-      @login = params[:login]
-      @password = params[:password]
+post "/admin" do
+    @login = params[:login]
+    @password = params[:password]
     
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
@@ -74,6 +74,4 @@ post "/" do
       end
     end
    
-   post "/" do
-    
-    end
+   
