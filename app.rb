@@ -3,13 +3,40 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pony'
+require 'sqlite3'
+                   #Sozdanie bazy
+#////////////////////////////////////////////////////////////////////////////////
+def get_db
+  return SQLite3::Database.new 'test.sqlite'
+end
+
+configure do
+  db = get_db
+  db.execute 'CREATE TABLE IF NOT EXISTS "Messages"
+    (
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "name" TEXT,
+      "phone" TEXT,
+      "adres" TEXT,
+      "barber" TEXT,
+      "color" TEXT)'
+  db.close
+end
+             #Zapis w bazu
+def save_form_data_to_database
+  db = get_db
+  db.execute 'INSERT INTO Messages (name, phone, adres, barber, color)
+  VALUES (?, ?, ?, ?, ?)', [@name,@phone,@adres,@barber,@color]
+  db.close
+end
+#/////////////////////////////////////////////////////////////////////////////////
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
   end
 
 get "/about" do
-    erb :about  #podkluczenie fila HTML
+    erb #"about  #podkluczenie fila HTML
   end
 
 get "/visit" do
@@ -24,24 +51,24 @@ get "/admin" do
     erb :admin
   end
 
-
 post "/" do
     @name = params[:aaa]  #Peredacza i cztenie parametra s HTML "Fail <layout.erb>"
     @phone = params[:bbb]
-    @adres = params[:ccc]
+    @adres = params[:datetime]
     @barber = params[:barber]
     @color = params[:color]
  #//////////////////////////////////////////////////////////////////////////////////////////////
     # hesh dla prowerki # хеш для валидации параметров
-    hh = {:aaa => "Введите ваше имя",:bbb => "Введите ваш телефон",:ccc => "Введите вашу дату"}
+    hh = {:aaa => "Введите ваше имя",:bbb => "Введите ваш телефон",:datetime => "Введите вашу дату"}
 
     hh.each do  |key,value| 
        if params[key] == "" #esli parametr pust peremennoj "@error" priswoit value iz hesha
           @error = hh[key]
           return erb :visit
-     end
-   end                      #2 wariant
-   #@error = hh.select {|key,_| params[key] == ''}.values.join(", ")
+      end
+    end
+                           #2 wariant
+   #@error = hh.select do {|key,_| params[key] == ''}.values.join(", ")
    #if @error != ''
    # return erb :index
    #end
@@ -53,7 +80,7 @@ post "/" do
     f = File.open "./public/users.txt","a+"    #Otkrytie fila i sozdanie fila "./public/"
     f.write "User:#{@name},Phone:#{@phone},Your Adres:#{@adres},Your barber:#{@barber},Your color:#{@color}\n"
     f.close
-
+    save_form_data_to_database
       erb :message
   end    
   
