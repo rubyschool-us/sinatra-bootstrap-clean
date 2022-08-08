@@ -1,11 +1,38 @@
 <h1>Admin Panel (Watch Result)</h1>
 
-<table border="1">
-<% @file.each_line do |line| %>
-  <tr><td><%= line %></td></tr>
-<% end %>
+<!table border="1">
+<!% @file.each_line do |line| %>      <!Wywod Fila>
+  <!tr><!td><!%= line %><!/td><!/tr>
+<!% end %>
+<!/table>
+
+<!%= @file.close %>
+
+ <!%= @results %>
+<table class="table table-striped">
+  
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Date</th>
+      <th scope="col">Barber</th>
+      <th scope="col">Color</th>
+  </tr>
+  </thead>
+  
+  <tbody>
+    
+    <% @results.each do |row| %>
+  
+  <tr <%= "style='background-color: red; color: white;'" if row == @results.first %> >
+    <td><%= row['name'] %></td>
+    <td><%= row['phone'] %></td>
+    <td><%= row['adres'] %></td>
+    <td><%= row['barber'] %></td>
+    <td><%= row['color'] %></td>
+  </tr>
+ <% end %>
+</tbody>
 </table>
-
-<%= @file.close %>
-
-
+  
