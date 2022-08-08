@@ -7,7 +7,9 @@ require 'sqlite3'
                    #Sozdanie bazy
 #////////////////////////////////////////////////////////////////////////////////
 def get_db
-  return SQLite3::Database.new 'test.sqlite'
+  db = SQLite3::Database.new 'test.sqlite'
+  db.results_as_hash = true
+   return db
 end
 
 configure do
@@ -36,7 +38,7 @@ get '/' do
   end
 
 get "/about" do
-    erb #"about  #podkluczenie fila HTML
+    erb :about #"about  #podkluczenie fila HTML
   end
 
 get "/visit" do
@@ -48,9 +50,16 @@ get "/contacts" do
   end
 
 get "/admin" do
-    erb :admin
+  erb :admin
   end
 
+get "/watch_result" do
+  db = get_db
+  @results = db.execute 'SELECT * FROM Messages ORDER BY id DESC'
+  #db.close
+  erb :watch_result
+  end
+  
 post "/" do
     @name = params[:aaa]  #Peredacza i cztenie parametra s HTML "Fail <layout.erb>"
     @phone = params[:bbb]
@@ -92,7 +101,7 @@ post "/admin" do
     
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
-        @file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
+        #@file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
         erb :watch_result
         #@file.close #- должно быть, но тогда не работает. указал в erb
       else
@@ -100,5 +109,6 @@ post "/admin" do
         erb :admin
       end
     end
-   
+  
+    
    
