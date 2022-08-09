@@ -6,15 +6,23 @@ require 'pony'
 require 'sqlite3'
                    #Sozdanie bazy
 #////////////////////////////////////////////////////////////////////////////////
+#--------------------------------------------------------------------------------
 def is_barber_exists? db,name
-  db.execute('select * from Barbers were name=?',[name]).lanht > 0
-end
+  db.execute('select * from Barbers where name=?',[name]).lanht > 0
+  end
+
+def seed_db db, barbers
+  barbers.each do |barber|
+  if !is_barber_exists? db, barbers
+      db.execute 'INSERT INTO Barbers (name) VALUES (?)', [barber]
+  end
+#--------------------------------------------------------------------------------
 
 def get_db
   db = SQLite3::Database.new 'test.sqlite'
   db.results_as_hash = true
    return db
-end
+ end
 
 configure do
   db = get_db
@@ -27,8 +35,14 @@ configure do
       "barber" TEXT,
       "color" TEXT)'
   db.close
-end
-             #Zapis w bazu
+             #Sozdanie SQL dla parikmahera
+  db.execute 'CREATE TABLE IF NOT EXISTS "Barbers"
+    (
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "name" TEXT)'
+    seed_db db, ["Петя","Оля","Дуся"]
+    end
+                     #Zapis w bazu
 def save_form_data_to_database
   db = get_db
   db.execute 'INSERT INTO Messages (name, phone, adres, barber, color)
@@ -36,6 +50,7 @@ def save_form_data_to_database
   db.close
  end
  
+                       #Read SQL
 def read_sql
   db = get_db
   @results = db.execute 'SELECT * FROM Messages ORDER BY id DESC'
@@ -64,6 +79,7 @@ get "/admin" do
   end
 
 get "/watch_result" do
+    read_sql
     erb :watch_result
   end
   
@@ -109,7 +125,7 @@ post "/admin" do
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
         @file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
-        read_sql
+        read_sql #podkluchenie SQL i cztenie
         erb :watch_result
         #@file.close #- должно быть, но тогда не работает. указал в erb
       else
