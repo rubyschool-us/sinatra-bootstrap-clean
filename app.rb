@@ -6,6 +6,10 @@ require 'pony'
 require 'sqlite3'
                    #Sozdanie bazy
 #////////////////////////////////////////////////////////////////////////////////
+def is_barber_exists? db,name
+  db.execute('select * from Barbers were name=?',[name]).lanht > 0
+end
+
 def get_db
   db = SQLite3::Database.new 'test.sqlite'
   db.results_as_hash = true
@@ -30,15 +34,21 @@ def save_form_data_to_database
   db.execute 'INSERT INTO Messages (name, phone, adres, barber, color)
   VALUES (?, ?, ?, ?, ?)', [@name,@phone,@adres,@barber,@color]
   db.close
-end
+ end
+ 
+def read_sql
+  db = get_db
+  @results = db.execute 'SELECT * FROM Messages ORDER BY id DESC'
+  db.close
+ end
 #/////////////////////////////////////////////////////////////////////////////////
 
 get '/' do
-	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
+	  erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
   end
 
 get "/about" do
-    erb :about #"about  #podkluczenie fila HTML
+    erb :about  #podkluczenie fila HTML
   end
 
 get "/visit" do
@@ -50,14 +60,11 @@ get "/contacts" do
   end
 
 get "/admin" do
-  erb :admin
+    erb :admin
   end
 
 get "/watch_result" do
-  db = get_db
-  @results = db.execute 'SELECT * FROM Messages ORDER BY id DESC'
-  #db.close
-  erb :watch_result
+    erb :watch_result
   end
   
 post "/" do
@@ -101,7 +108,8 @@ post "/admin" do
     
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
-        #@file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
+        @file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
+        read_sql
         erb :watch_result
         #@file.close #- должно быть, но тогда не работает. указал в erb
       else
