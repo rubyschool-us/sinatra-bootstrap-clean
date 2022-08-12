@@ -59,6 +59,10 @@ def read_sql
   db.close
  end
  
+ before do          #Read SQL kak 2 wariant
+  db = get_db
+  @barbers = db.execute 'Select * from Barbers'
+ end
 #/////////////////////////////////////////////////////////////////////////////////
 
 get '/' do
@@ -66,7 +70,7 @@ get '/' do
   end
 
 get "/about" do
-    erb :about  #podkluczenie fila HTML
+  erb :about  #podkluczenie fila HTML
   end
 
 get "/visit" do
