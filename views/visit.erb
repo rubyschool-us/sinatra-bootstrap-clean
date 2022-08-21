@@ -23,12 +23,15 @@
   <select name="barber" class="form-control">
     <option selected>Ваше меню</option>
      
-     <!--        <!Sochranenie znachenija w pole>
+    <!--          <!Sochranenie znachenija w pole I zagruzka w pole parikmacherow>
     <option <%= @barber == "Петя" ? "selected": ""%>>Петя</option>
     <option <%= @barber == "Оля" ? "selected": ""%>>Оля</option>
     <option <%= @barber == "Дуся" ? "selected": ""%>>Дуся</option> 
      -->
-  
+                <! Zagruzka spiska parikmacherow s bazy SQL>
+    <%@barbers.each do |item|%>
+    <option <%= @barber == item['name'] ? "selected": ''%>> <%= item['name'] %></option>
+    <% end %>
   
   </select>
   <label for="floatingSelect">Ваш парикмахер:</label>
@@ -65,9 +68,9 @@
 
              <!Izmenenie cweta w kolonke>
 <script type="text/javascript"> 
-$("#aaa").css("background-color","yellow") // Izmenenie cweta razowo <input id="aaa"
+$("#aaa").css("background-color","white") // Izmenenie cweta razowo <input id="aaa"
 
-$(".bbb").css("background-color","grey") //Izmenenie cweta cherez class="form-control bbb 
+$(".bbb").css("background-color","white") //Izmenenie cweta cherez class="form-control bbb 
 </script>
 
  
