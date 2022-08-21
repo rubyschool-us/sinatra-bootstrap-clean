@@ -8,7 +8,6 @@
 
 <!%= @file.close %>
 
- <%= @barbers %>
 <table class="table table-striped">
   
   <thead>
@@ -25,12 +24,13 @@
     
     <% @results.each do |row| %>
   
-  <tr <%= "style='background-color: red; color: white;'" if row == @results.first %> >
+  <tr <%= style='background-color: red; color: white;' if row == @results.first %> >
     <td><%= row['name'] %></td>
     <td><%= row['phone'] %></td>
     <td><%= row['adres'] %></td>
     <td><%= row['barber'] %></td>
-    <td><%= row['color'] %></td>
+    <td style="background-color :<%= row['color']%>"> <%= row['color'] %></td>
+            <!Okras stolbca w Color!>
   </tr>
  <% end %>
 </tbody>
