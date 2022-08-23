@@ -43,7 +43,7 @@ configure do
       "name" TEXT
       )'
     seed_db db, ["Петя","Оля","Дуся"]
-  #db.close
+  db.close
   end
                      #Zapis w bazu
 def save_form_data_to_database
@@ -70,6 +70,7 @@ get '/' do
   end
 
 get "/about" do
+  erb " <a href=\"http://rubyschool.us\">Иди броди</a>. Give it a click if you like."
   erb :about  #podkluczenie fila HTML
   end
 
@@ -131,7 +132,7 @@ post "/admin" do
     
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
-        @file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
+        #@file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
         read_sql #podkluchenie SQL i cztenie
         erb :watch_result
         #@file.close #- должно быть, но тогда не работает. указал в erb
