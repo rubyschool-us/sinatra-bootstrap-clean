@@ -6,17 +6,6 @@ require 'pony'
 require 'sqlite3'
                    #Sozdanie bazy
 #////////////////////////////////////////////////////////////////////////////////
-#--------------------------------------------------------------------------------
-def is_barber_exists? db,name
-  db.execute('select * from Barbers where name=?',[name]).lanht > 0
-  end
-
-def seed_db db, barbers
-  barbers.each do |barber|
-  if !is_barber_exists? db, barbers
-      db.execute 'INSERT INTO Barbers (name) VALUES (?)', [barber]
-  end
-#--------------------------------------------------------------------------------
 
 def get_db
   db = SQLite3::Database.new 'test.sqlite'
@@ -34,28 +23,22 @@ configure do
       "adres" TEXT,
       "barber" TEXT,
       "color" TEXT)'
-  db.close
-             #Sozdanie SQL dla parikmahera
-  db.execute 'CREATE TABLE IF NOT EXISTS "Barbers"
-    (
-      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-      "name" TEXT)'
-    seed_db db, ["Петя","Оля","Дуся"]
-    end
+   db.close
+  end
                      #Zapis w bazu
 def save_form_data_to_database
   db = get_db
   db.execute 'INSERT INTO Messages (name, phone, adres, barber, color)
   VALUES (?, ?, ?, ?, ?)', [@name,@phone,@adres,@barber,@color]
   db.close
- end
- 
+ end      
                        #Read SQL
 def read_sql
   db = get_db
   @results = db.execute 'SELECT * FROM Messages ORDER BY id DESC'
   db.close
  end
+ 
 #/////////////////////////////////////////////////////////////////////////////////
 
 get '/' do
