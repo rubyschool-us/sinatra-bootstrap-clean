@@ -4,7 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'pony'
 require 'sqlite3'
-                   #Sozdanie bazy
+                   #Sozdanie bazy dla spiska imen
 #////////////////////////////////////////////////////////////////////////////////
 def is_barber_exists? db,name
   db.execute('select * from Barbers where name=?',[name]).length > 0
@@ -17,6 +17,7 @@ def seed_db db, barbers
    end
   end
  end          
+#/////////////////////////////////////////////////////////////////////////////////
 
 def get_db
   db = SQLite3::Database.new 'test.sqlite'
