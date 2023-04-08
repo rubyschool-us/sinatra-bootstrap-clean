@@ -1,0 +1,61 @@
+<h1>О нас!</h1>
+<p>You are logged in!<p>
+ 
+ <%= @results %>
+
+<table class="table table-striped">
+  
+     <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Date</th>
+      <th scope="col">Barber</th>
+      <th scope="col">Color</th>
+  </tr>
+  </thead>
+</div>
+
+</table>
+
+<div class="form-group">
+  <select name="barber" class="form-control">
+    <option selected>Ваше меню</option>
+               <!Sochranenie znachenija w pole>
+    <option <%= @barber == "Петя" ? "selected": ""%>>Петя</option>
+    <option <%= @barber == "Оля" ? "selected": ""%>>Оля</option>
+    <option <%= @barber == "Дуся" ? "selected": ""%>>Дуся</option>
+  </select>
+  <label for="floatingSelect">Ваш парикмахер:</label>
+</div>
+
+ <div class="from-group">  
+   <label>Цвет краски:</label>
+<select id="color" name="color">   <!Podkluczenie js color, + name="color" peredacza na server>
+  <option value="Green">Green</option>
+  <option value="SteelBlue">SteelBlue</option>
+  <option value="Blue">Blue</option>
+  <option value="Turquoise">Turquoise</option>
+  <option value="LightGreen">LightGreen</option>
+  <option value="Tan">Tan</option>
+  <option value="Yellow">Yellow</option>
+  <option value="Orange">Orange</option>
+  <option value="Red">Red</option>
+  <option value="Maroon">Maroon</option>
+  <option value="Purple">Purple</option>
+  <option value="Grey">Gray</option>
+</select>
+</div>
+
+<div class="alert alert-danger" role="alert">
+  A simple danger alert with <a href="/http://rubyschool.us/" class="alert-link">Иди броди</a>. Give it a click if you like.
+</div>
+
+<script type="text/javascript"> 
+                              // Tut ja mogu napisat luboy js code
+$(function() {               // Js construkcija kak w Ruby "def"
+  $("#color").simplecolorpicker();  //Podkluczenie javascript bloka color!
+
+  });
+
+</script>

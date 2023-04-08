@@ -1,0 +1,85 @@
+<h1>Записаться!</h1>
+<p>На этой страние вы можете Записаться в Barber Shop!<p>
+
+<form action= "/" method= "POST">             <!Blok tablica!>
+  
+  <div class="form-group">
+    
+    <legend>Ваше имя</legend>   
+      <label class="form-label">Введите ваше имя</label>                               <!Sochranenie znachenija w pole>
+      <input name="aaa" id="aaa"  type="text" class="form-control" placeholder="Ваше имя" value="<%= @name %>">
+    
+    <legend>Телефон</legend>   
+      <label class="form-label">Введите ваш Телефон</label>                               <!Sochranenie znachenija w pole>
+      <input  name="bbb" type="text" class="form-control bbb" placeholder="Ваш телефон" value="<%= @phone %>">
+                                 <!Izmenenie cweta cherez class="form-control bbb >
+    <legend>Дата и Время</legend>  
+      <label class="form-label">Введите вашу Дату и Время</label>                                    <!Sochranenie znachenija w pole>   
+      <input  type="text" id="demo" name="datetime"  class="form-control" placeholder="Дата и время" value="<%= @date %>">
+
+</div>
+
+  <div class="form-group">
+  <select name="barber" class="form-control">
+    <option selected>Ваше меню</option>
+     
+    <!--          <!Sochranenie znachenija w pole I zagruzka w pole parikmacherow>
+    <option <%= @barber == "Петя" ? "selected": ""%>>Петя</option>
+    <option <%= @barber == "Оля" ? "selected": ""%>>Оля</option>
+    <option <%= @barber == "Дуся" ? "selected": ""%>>Дуся</option> 
+     -->
+                <! Zagruzka spiska parikmacherow s bazy SQL>
+    <%@barbers.each do |item|%>
+    <option <%= @barber == item['name'] ? "selected": ''%>> <%= item['name'] %></option>
+    <% end %>
+  
+  </select>
+  <label for="floatingSelect">Ваш парикмахер:</label>
+</div>
+   
+                  <!Podkluczenie bloka color>
+   <div class="from-group">  
+   <label>Цвет краски:</label>
+<select id="color" name="color">   <!Podkluczenie js color, + name="color" peredacza na server>
+  <option value="Green">Green</option>
+  <option value="SteelBlue">SteelBlue</option>
+  <option value="Blue">Blue</option>
+  <option value="Turquoise">Turquoise</option>
+  <option value="LightGreen">LightGreen</option>
+  <option value="Tan">Tan</option>
+  <option value="Yellow">Yellow</option>
+  <option value="Orange">Orange</option>
+  <option value="Red">Red</option>
+  <option value="Maroon">Maroon</option>
+  <option value="Purple">Purple</option>
+  <option value="Grey">Gray</option>
+  <option value="Black">Black</option>
+</select>
+</div>
+ 
+ <button type="submit" class="btn btn-primary">Записаться</button>
+  
+</form>
+<!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>
+                     <!JavaScript>
+<!script type="text/javascript"> <!//Podkluczenie javascript window>
+<!alert("Hello!")>
+<!/script>
+
+             <!Izmenenie cweta w kolonke>
+<script type="text/javascript"> 
+$("#aaa").css("background-color","white") // Izmenenie cweta razowo <input id="aaa"
+
+$(".bbb").css("background-color","white") //Izmenenie cweta cherez class="form-control bbb 
+</script>
+
+ 
+<script type="text/javascript"> 
+                              // Tut ja mogu napisat luboy js code
+$(function() {               // Js construkcija kak w Ruby "def"
+  $("#color").simplecolorpicker();  //Podkluczenie javascript bloka color!
+  $("#demo").datetimepicker()      // Podkluczenir kalendara
+  });
+
+</script>
+

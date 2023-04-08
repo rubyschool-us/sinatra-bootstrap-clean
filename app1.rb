@@ -4,8 +4,20 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'pony'
 require 'sqlite3'
-                   #Sozdanie bazy
+                   #Sozdanie bazy dla spiska imen
 #////////////////////////////////////////////////////////////////////////////////
+def is_barber_exists? db,name
+  db.execute('select * from Barbers where name=?',[name]).length > 0
+  end
+
+def seed_db db, barbers
+  barbers.each do |barber|
+  if !is_barber_exists? db, barber
+      db.execute 'INSERT INTO Barbers (name) VALUES (?)', [barber]
+   end
+  end
+ end          
+#/////////////////////////////////////////////////////////////////////////////////
 
 def get_db
   db = SQLite3::Database.new 'test.sqlite'
@@ -22,8 +34,17 @@ configure do
       "phone" TEXT,
       "adres" TEXT,
       "barber" TEXT,
-      "color" TEXT)'
-   db.close
+      "color" TEXT
+      )'
+  
+             #Sozdanie SQL dla parikmahera
+  db.execute 'CREATE TABLE IF NOT EXISTS "Barbers"
+    (
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "name" TEXT
+      )'
+    seed_db db, ["Петя","Оля","Дуся"]
+  db.close
   end
                      #Zapis w bazu
 def save_form_data_to_database
@@ -39,6 +60,10 @@ def read_sql
   db.close
  end
  
+ before do          #Read SQL kak 2 wariant
+  db = get_db
+  @barbers = db.execute 'Select * from Barbers'
+ end
 #/////////////////////////////////////////////////////////////////////////////////
 
 get '/' do
@@ -46,7 +71,8 @@ get '/' do
   end
 
 get "/about" do
-    erb :about  #podkluczenie fila HTML
+  erb " <a href=\"http://rubyschool.us\">Иди броди</a>. Give it a click if you like."
+  erb :about  #podkluczenie fila HTML
   end
 
 get "/visit" do
@@ -107,7 +133,7 @@ post "/admin" do
     
       # проверим логин и пароль, и пускаем внутрь или нет:
      if @login == "admin" && @password == "anna"
-        @file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
+        #@file = File.open "./public/users.txt","r+"  #Otkrytie fila i sozdanie fila "./public/"
         read_sql #podkluchenie SQL i cztenie
         erb :watch_result
         #@file.close #- должно быть, но тогда не работает. указал в erb
